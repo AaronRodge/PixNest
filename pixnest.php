@@ -105,6 +105,147 @@ $ratings = isset($_SESSION['ratings']) ? $_SESSION['ratings'] : [];
     <title>PixNest</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: #e60023;
+            color: #fff;
+            padding: 1.5rem 0 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            letter-spacing: 2px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+        .registration-form, #upload-form {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 350px;
+            margin: 2rem auto;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .registration-form label, #upload-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .registration-form input, #upload-form input {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .registration-form button, #upload-form button, .save-btn, .unsave-btn, .download-btn {
+            background: #e60023;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7rem 1.3rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+        .registration-form button:hover, #upload-form button:hover, .save-btn:hover, .unsave-btn:hover, .download-btn:hover {
+            background: #b8001c;
+        }
+        .menu-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        .menu-bar a {
+            color: #e60023;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .menu-bar a.active, .menu-bar a:hover {
+            background: #e60023;
+            color: #fff;
+        }
+        .about-section {
+            background: #f9fafb;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: center;
+        }
+        .error {
+            color: #e60023;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 1rem;
+            transition: transform 0.15s;
+        }
+        .card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(230,0,35,0.10);
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            background: #f3f4f6;
+        }
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 1.2rem;
+            background: #f9fafb;
+        }
+        .download-btn {
+            background: #6366f1;
+            margin-right: 0.5rem;
+        }
+        .download-btn:hover {
+            background: #4338ca;
+        }
+        .save-btn[disabled] {
+            background: #d1d5db;
+            color: #888;
+            cursor: not-allowed;
+        }
         .star-rating {
             display: flex;
             flex-direction: row-reverse;
@@ -128,14 +269,16 @@ $ratings = isset($_SESSION['ratings']) ? $_SESSION['ratings'] : [];
         .star-rating .rated {
             color: #e60023;
         }
-        .about-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 700px;
-            text-align: center;
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem 0.2rem;
+            }
+            .about-section {
+                padding: 1.2rem;
+            }
+            .card img {
+                height: 140px;
+            }
         }
     </style>
 </head>
